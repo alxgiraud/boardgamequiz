@@ -1,0 +1,27 @@
+{
+    "name": "bg-stats",
+    "version": "0.0.1",
+    "description": "Some statistics from BGG API",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alxgiraud/bg-stats.git"
+    },
+    "author": "Alexandre Giraud",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/alxgiraud/bg-stats/issues"
+    },
+    "homepage": "https://github.com/alxgiraud/bg-stats",
+    "dependencies": {
+        "body-parser": "^1.14.1",
+        "express": "^4.13.3",
+        "method-override": "^2.3.5",
+        "mongodb": "^2.0.47",
+        "mongoose": "^4.2.4",
+        "morgan": "^1.6.1"
+    }
+}
