@@ -1,0 +1,27 @@
+.counter-container {
+    max-width: 250px;
+}
+
+.counter-container svg {
+    padding: 5px;
+}
+
+.counter-number {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.progress {
+    height: 15px;
+}
+
+.large-row {
+    height: 80px;
+}
+
+.card-choice:hover {
+    cursor: pointer;
+}

@@ -5,7 +5,7 @@ define(['app'], function (app) {
 		var urlBase = '/api';
 		
 		return {
-			getRandomGame: function () {
+			getThreeRandomGames: function () {
 				return $http.get(urlBase + '/games/random');
 			}
 		};

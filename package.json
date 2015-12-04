@@ -1,6 +1,6 @@
 {
     "name": "bg-stats",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Some statistics from BGG API",
     "main": "index.js",
     "scripts": {
