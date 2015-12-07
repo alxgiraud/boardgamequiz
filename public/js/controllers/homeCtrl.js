@@ -6,7 +6,7 @@ define(['app', 'services/quizServices'], function (app) {
         var choicesEnabled = false,
             quizNumber = 0,
             countdown,
-            quizzHelper = {
+            quizHelper = {
                 //Get game data and init the question
                 getGames: function () {
                     quizServices.getGames().then(function (result) {
@@ -14,7 +14,7 @@ define(['app', 'services/quizServices'], function (app) {
                         $scope.winningGame = games[Math.floor(Math.random() * games.length)];
                         $scope.choices = quizServices.convertGamesToChoices(games);
 
-                        quizzHelper.initUI();
+                        quizHelper.initUI();
 
                     }, function (error) {
                         $scope.error = 'Oups! An error occurred while retrieving the games.';
@@ -27,7 +27,7 @@ define(['app', 'services/quizServices'], function (app) {
                     $scope.quizNumber = quizNumber;
 
                     $scope.counter = 150;
-                    countdown = $interval(quizzHelper.decreaseCountdown, 100);
+                    countdown = $interval(quizHelper.decreaseCountdown, 100);
 
                     choicesEnabled = true;
                     $scope.classOverlay = [null, null, null];
@@ -38,8 +38,31 @@ define(['app', 'services/quizServices'], function (app) {
                     if ($scope.counter > 0) {
                         $scope.counter -= 1;
                     } else {
-                        quizzHelper.endQuestion(0);
+                        quizHelper.stopCountdown();
+                        quizHelper.displayCorrectAnswer();
+                        quizHelper.loadNextTurn();
                     }
+                },
+
+                // Search and display the correct answer to the user
+                displayCorrectAnswer: function () {
+                    var i;
+                    for (i = 0; i < $scope.choices.length; i += 1) {
+                        if ($scope.choices[i].gameId === $scope.winningGame.game_id) {
+                            $scope.classOverlay[i] = 'overlay-correct';
+                        }
+                    }
+                },
+
+                // Load the next turn or call the end of the game
+                loadNextTurn: function () {
+                    $timeout(function () {
+                        if (quizNumber < 10) {
+                            quizHelper.getGames();
+                        } else {
+                            console.log("GAME OVER"); //TODO: Game Over
+                        }
+                    }, 1000);
                 },
 
                 // Stop the countdown
@@ -54,39 +77,28 @@ define(['app', 'services/quizServices'], function (app) {
                 handleClickOnChoice: function (id, gameId) {
                     if (choicesEnabled) {
                         choicesEnabled = false;
-                        quizzHelper.stopCountdown();
+                        quizHelper.stopCountdown();
 
                         if (gameId === $scope.winningGame.game_id) {
                             $scope.classOverlay[id] = 'overlay-correct';
                             $scope.score += 10 + Math.ceil($scope.counter / 10);
 
                         } else {
-                            var i;
                             $scope.classOverlay[id] = 'overlay-wrong';
-                            for (i = 0; i < $scope.choices.length; i += 1) {
-                                if ($scope.choices[i].gameId === $scope.winningGame.game_id) {
-                                    $scope.classOverlay[i] = 'overlay-correct';
-                                }
-                            }
+                            quizHelper.displayCorrectAnswer();
+
                         }
 
-                        $timeout(function () {
-                            if (quizNumber < 10) {
-                                quizzHelper.getGames();
-                            } else {
-                                console.log("GAME OVER"); //TODO: Game Over
-                            }
-                        }, 1000);
+                        quizHelper.loadNextTurn();
                     }
-
                 }
             };
 
         $scope.score = 0;
-        quizzHelper.getGames();
+        quizHelper.getGames();
 
         $scope.selectGame = function (id, gameId) {
-            quizzHelper.handleClickOnChoice(id, gameId);
+            quizHelper.handleClickOnChoice(id, gameId);
         };
     }]);
 });
