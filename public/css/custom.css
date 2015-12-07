@@ -25,3 +25,9 @@
 .card-choice:hover {
     cursor: pointer;
 }
+
+.choice-disabled {
+    background-color: red;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}

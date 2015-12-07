@@ -108,7 +108,7 @@
 
     <div class="row">
         <div class="col-md-4" ng-repeat="choice in choices" ng-click="selectGame(choice.id)">
-            <div class="panel panel-default card-choice">
+            <div class="panel panel-default card-choice" ng-class="classChoices">
                 <div class="panel-body">
                     <div class="center-block well" style="width:250px; height:200px;">
                         <img ng-src="{{ choice.thumbnail }}" alt="{{ choice.name }}" class="center-block" />
