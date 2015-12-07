@@ -1,7 +1,7 @@
 /*global define, angular*/
 define(['app', 'services/quizServices'], function (app) {
     'use strict';
-    app.controller('HomeCtrl', ['$scope', '$interval', '$timeout', 'quizServices', function ($scope, $interval, $timeout, quizServices) {
+    app.controller('HomeCtrl', ['$scope', '$interval', '$timeout', 'quizServices', 'GameConstants', function ($scope, $interval, $timeout, quizServices, GameConstants) {
 
         var choicesEnabled = false,
             quizNumber = 0,
@@ -26,7 +26,7 @@ define(['app', 'services/quizServices'], function (app) {
                     quizNumber += 1;
                     $scope.quizNumber = quizNumber;
 
-                    $scope.counter = 150;
+                    $scope.counter = GameConstants.COUNTDOWN;
                     countdown = $interval(quizHelper.decreaseCountdown, 100);
 
                     choicesEnabled = true;
@@ -57,12 +57,12 @@ define(['app', 'services/quizServices'], function (app) {
                 // Load the next turn or call the end of the game
                 loadNextTurn: function () {
                     $timeout(function () {
-                        if (quizNumber < 10) {
+                        if (quizNumber < GameConstants.GAMES_PER_ROUND) {
                             quizHelper.getGames();
                         } else {
                             console.log("GAME OVER"); //TODO: Game Over
                         }
-                    }, 1000);
+                    }, GameConstants.DELAY_BEFORE_NEXT_TURN);
                 },
 
                 // Stop the countdown
@@ -81,7 +81,7 @@ define(['app', 'services/quizServices'], function (app) {
 
                         if (gameId === $scope.winningGame.game_id) {
                             $scope.classOverlay[id] = 'overlay-correct';
-                            $scope.score += 10 + Math.ceil($scope.counter / 10);
+                            $scope.score += GameConstants.BASE_SCORE + Math.ceil($scope.counter * GameConstants.TIME_BONUS);
 
                         } else {
                             $scope.classOverlay[id] = 'overlay-wrong';
@@ -100,5 +100,6 @@ define(['app', 'services/quizServices'], function (app) {
         $scope.selectGame = function (id, gameId) {
             quizHelper.handleClickOnChoice(id, gameId);
         };
+        
     }]);
 });
