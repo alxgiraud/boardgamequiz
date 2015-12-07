@@ -3,26 +3,37 @@ define(['app', 'services/quizServices'], function (app) {
     'use strict';
     app.controller('HomeCtrl', ['$scope', '$interval', '$timeout', 'quizServices', function ($scope, $interval, $timeout, quizServices) {
 
-        var quizNumber = 0,
+        var choicesEnabled = false,
+            quizNumber = 0,
             countdown,
             quizzHelper = {
+                //Get game data and init the question
                 getGames: function () {
-                    quizNumber += 1;
-                    $scope.quizNumber = quizNumber;
                     quizServices.getGames().then(function (result) {
                         var games = result.data;
-
                         $scope.winningGame = games[Math.floor(Math.random() * games.length)];
                         $scope.choices = quizServices.convertGamesToChoices(games);
-                        $scope.classChoice = null;
 
-                        $scope.counter = 150;
-                        countdown = $interval(quizzHelper.decreaseCountdown, 100);
+                        quizzHelper.initUI();
 
                     }, function (error) {
                         $scope.error = 'Oups! An error occurred while retrieving the games.';
                     });
                 },
+
+                // Manage the countdown, quiz number and choice overlays
+                initUI: function () {
+                    quizNumber += 1;
+                    $scope.quizNumber = quizNumber;
+
+                    $scope.counter = 150;
+                    countdown = $interval(quizzHelper.decreaseCountdown, 100);
+
+                    choicesEnabled = true;
+                    $scope.classOverlay = [null, null, null];
+                },
+
+                // Countdown management
                 decreaseCountdown: function () {
                     if ($scope.counter > 0) {
                         $scope.counter -= 1;
@@ -30,53 +41,52 @@ define(['app', 'services/quizServices'], function (app) {
                         quizzHelper.endQuestion(0);
                     }
                 },
-                endQuestion: function (win) {
-                    quizzHelper.stopCountdown();
-                    $scope.classChoice = 'choice-disabled';
 
-                    if (win) {
-                        console.log("WIN");
-                    } else {
-                        console.log("LOOSE");
-                    }
-
-                    $timeout(function () {
-                        if (quizNumber < 10) {
-                            quizzHelper.getGames();
-                        } else {
-                            console.log("GAME OVER");
-                        }
-                    }, 1000);
-                },
+                // Stop the countdown
                 stopCountdown: function () {
                     if (angular.isDefined(countdown)) {
                         $interval.cancel(countdown);
                         countdown = undefined;
                     }
                 },
-                handleClickOnChoice: function (id) {
-                    if ($scope.classChoice !== 'choice-disabled') {
+
+                // Manager the choice of the player
+                handleClickOnChoice: function (id, gameId) {
+                    if (choicesEnabled) {
+                        choicesEnabled = false;
                         quizzHelper.stopCountdown();
-                        if (id === $scope.winningGame.game_id) {
+
+                        if (gameId === $scope.winningGame.game_id) {
+                            $scope.classOverlay[id] = 'overlay-correct';
                             $scope.score += 10 + Math.ceil($scope.counter / 10);
 
-                            quizzHelper.endQuestion(1);
-
                         } else {
-                            quizzHelper.endQuestion(0);
+                            var i;
+                            $scope.classOverlay[id] = 'overlay-wrong';
+                            for (i = 0; i < $scope.choices.length; i += 1) {
+                                if ($scope.choices[i].gameId === $scope.winningGame.game_id) {
+                                    $scope.classOverlay[i] = 'overlay-correct';
+                                }
+                            }
                         }
+
+                        $timeout(function () {
+                            if (quizNumber < 10) {
+                                quizzHelper.getGames();
+                            } else {
+                                console.log("GAME OVER"); //TODO: Game Over
+                            }
+                        }, 1000);
                     }
+
                 }
             };
 
         $scope.score = 0;
-        $scope.quizNumber = 1;
-
         quizzHelper.getGames();
 
-        $scope.selectGame = function (id) {
-            quizzHelper.handleClickOnChoice(id);
+        $scope.selectGame = function (id, gameId) {
+            quizzHelper.handleClickOnChoice(id, gameId);
         };
-
     }]);
 });

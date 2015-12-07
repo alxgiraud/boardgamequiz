@@ -28,7 +28,8 @@ define(['app', 'services/apiServices'], function (app) {
 
                 for (i = 0; i < l; i += 1) {
                     choices.push({
-                        id: games[i].game_id,
+                        id: i,
+                        gameId: games[i].game_id,
                         thumbnail: games[i].thumbnail,
                         name: getPrimaryName(games[i].names)
                     });

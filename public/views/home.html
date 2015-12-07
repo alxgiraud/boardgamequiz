@@ -6,20 +6,7 @@
         <div class="col-md-2">
             <div class="center-block counter-container">
                 <span class="counter-number">{{ counter / 10 | number : 0 }}</span>
-                <div
-                round-progress
-                max="150"
-                current="counter"
-                color="#2196f3"
-                bgcolor="#dddddd"
-                radius="50"
-                stroke="10"
-                semi="false"
-                rounded="false"
-                clockwise="true"
-                responsive="true"
-                duration="100"
-                animation="linearEase"></div>
+                <div round-progress max="150" current="counter" color="#2196f3" bgcolor="#dddddd" radius="50" stroke="10" semi="false" rounded="false" clockwise="true" responsive="true" duration="100" animation="linearEase"></div>
 
             </div>
         </div>
@@ -33,12 +20,7 @@
                 </div>
             </div>
             <div class="progress progress-striped">
-                <div class="progress-bar progress-striped" 
-                     role="progressbar"
-                     aria-valuenow="{{ quizNumber }}"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     style="width: {{ (quizNumber - 1) * 10 }}%">
+                <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="{{ quizNumber }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ (quizNumber - 1) * 10 }}%">
                 </div>
             </div>
         </div>
@@ -105,17 +87,24 @@
             </tr>
         </tbody>
     </table>
-
     <div class="row">
-        <div class="col-md-4" ng-repeat="choice in choices" ng-click="selectGame(choice.id)">
-            <div class="panel panel-default card-choice" ng-class="classChoices">
-                <div class="panel-body">
-                    <div class="center-block well" style="width:250px; height:200px;">
-                        <img ng-src="{{ choice.thumbnail }}" alt="{{ choice.name }}" class="center-block" />
+        <div class="col-md-4 card-choice" ng-repeat="choice in choices">
+            <div class="panel panel-default">
+                <div class="panel-body" ng-class="(classOverlay[choice.id] !== null) ? 'hover' : ''" ng-click="selectGame(choice.id, choice.gameId)">
+                    <div class="center-block well well-thumbnail">
+                        <!--                        <img ng-src="{{ choice.thumbnail }}" alt="{{ choice.name }}" class="center-block" />-->
                     </div>
                     <button type="button" class="btn btn-primary center-block" style="white-space: normal;">
                         {{ choice.name }}
                     </button>
+                    <div class="overlay" ng-class="classOverlay[choice.id]">
+                        <span ng-show="classOverlay[choice.id] === 'overlay-correct'">
+                            <p>CORRECT</p>
+                        </span>
+                        <span ng-show="classOverlay[choice.id] === 'overlay-wrong'">
+                            <p>WRONG</p>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
