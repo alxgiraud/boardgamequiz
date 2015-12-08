@@ -96,7 +96,10 @@ define(['app', 'services/quizServices'], function (app) {
                     }
                 };
 
+            $scope.gamesPerRound = GameConstants.GAMES_PER_ROUND;
+            $scope.maxCounter = GameConstants.COUNTDOWN * 10;
             $scope.score = 0;
+            
             quizHelper.getGames();
 
             $scope.selectGame = function (id, gameId) {
