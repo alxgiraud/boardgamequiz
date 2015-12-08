@@ -14,13 +14,25 @@ define(['angularAMD', 'angular-route', 'roundProgress'], function (angularAMD) {
 
 
     app.config(function ($routeProvider) {
-        $routeProvider.when("/", angularAMD.route({
-            templateUrl: '../views/home.html',
-            controller: 'HomeCtrl',
-            controllerUrl: 'controllers/homeCtrl'
-        })).otherwise({
-            redirectTo: '/'
-        });
+        $routeProvider
+            .when("/", angularAMD.route({
+                templateUrl: '../views/home.html',
+                controller: 'HomeCtrl',
+                controllerUrl: 'controllers/homeCtrl'
+            }))
+            .when("/quiz", angularAMD.route({
+                templateUrl: '../views/quiz.html',
+                controller: 'QuizCtrl',
+                controllerUrl: 'controllers/quizCtrl'
+            }))
+            .when("/end", angularAMD.route({
+                templateUrl: '../views/end.html',
+                controller: 'EndCtrl',
+                controllerUrl: 'controllers/endCtrl'
+            }))
+            .otherwise({
+                redirectTo: '/'
+            });
     });
 
     return angularAMD.bootstrap(app);
