@@ -10,6 +10,7 @@ define(['app', 'services/quizServices'], function (app) {
                 //Get game data and init the question
                 getGames: function () {
                     quizServices.getGames().then(function (result) {
+                        console.log(result);
                         var games = result.data;
                         $scope.winningGame = games[Math.floor(Math.random() * games.length)];
                         $scope.choices = quizServices.convertGamesToChoices(games);
@@ -26,7 +27,7 @@ define(['app', 'services/quizServices'], function (app) {
                     quizNumber += 1;
                     $scope.quizNumber = quizNumber;
 
-                    $scope.counter = GameConstants.COUNTDOWN;
+                    $scope.counter = GameConstants.COUNTDOWN * 10;
                     countdown = $interval(quizHelper.decreaseCountdown, 100);
 
                     choicesEnabled = true;
@@ -81,12 +82,10 @@ define(['app', 'services/quizServices'], function (app) {
 
                         if (gameId === $scope.winningGame.game_id) {
                             $scope.classOverlay[id] = 'overlay-correct';
-                            $scope.score += GameConstants.BASE_SCORE + Math.ceil($scope.counter * GameConstants.TIME_BONUS);
-
+                            $scope.score += GameConstants.BASE_SCORE + Math.ceil($scope.counter * GameConstants.TIME_BONUS / 10);
                         } else {
                             $scope.classOverlay[id] = 'overlay-wrong';
                             quizHelper.displayCorrectAnswer();
-
                         }
 
                         quizHelper.loadNextTurn();

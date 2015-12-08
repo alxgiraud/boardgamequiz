@@ -4,20 +4,11 @@ module.exports = function (app) {
     var Models = require('../models/index');
 
     app.get('/api/games/random', function (req, res) {
-        Models.gameModel.random(function (err, records) {
+        Models.gameModel.getThreeRandomGames(function (err, records) {
             if (err) {
-                return res.send(err);
+                return res.status(500).send(err.message);
             }
-            res.json(records);
-        });
-
-    });
-
-    app.get('/api/games/:id', function (req, res) {
-        Models.gameModel.find({ game_id: req.params.id }, function (err, records) {
-            if (err) {
-                return res.send(err);
-            }
+            
             res.json(records);
         });
     });
