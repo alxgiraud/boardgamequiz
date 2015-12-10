@@ -6,7 +6,7 @@ define(['angularAMD', 'angular-route', 'roundProgress'], function (angularAMD) {
 
     app.constant('GameConstants', {
         COUNTDOWN: 15,                  // time allowed to the player to chose a game in second
-        GAMES_PER_ROUND: 10,            // amount of games to chose per round
+        GAMES_PER_ROUND: 1,            // amount of games to chose per round
         DELAY_BEFORE_NEXT_TURN: 1000,   // "break" time before next turn
         BASE_SCORE: 30,                 // Points earned for each correct choice
         TIME_BONUS: 1                   // Score bonus per second remaining

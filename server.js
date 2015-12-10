@@ -18,7 +18,6 @@ require('./mongoose');
 
 
 // routes
-require('./routes/web.js')(app);
 require('./routes/api.js')(app);
 
 
