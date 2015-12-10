@@ -6,18 +6,29 @@ define(['app', 'services/quizServices'], function (app) {
             var choicesEnabled = false,
                 quizNumber = 0,
                 countdown,
+                winningId,
                 quizHelper = {
-                    //Get game data and init the question
+                    // Get game data and init the question
                     getGames: function () {
                         quizServices.getGames().then(function (result) {
-                            var games = result.data;
-                            $scope.winningGame = games[Math.floor(Math.random() * games.length)];
-                            $scope.choices = quizServices.convertGamesToChoices(games);
+                            var games = result.data,
+                                winningGame = games[Math.floor(Math.random() * games.length)];
+                            
+                            if (winningGame.hasOwnProperty('game_id')) {
+                                
+                                winningId = winningGame.game_id;
+                                $scope.clues = quizServices.getRandomClues(winningGame);
+                                $scope.choices = quizServices.convertGamesToChoices(games);
 
-                            quizHelper.initUI();
-
+                                quizHelper.initUI();
+                                
+                            } else {
+                                $scope.error = 'Oups! The games retrieved contain an error.';
+                                
+                            }
                         }, function (error) {
                             $scope.error = 'Oups! An error occurred while retrieving the games.';
+                            
                         });
                     },
 
@@ -48,7 +59,7 @@ define(['app', 'services/quizServices'], function (app) {
                     displayCorrectAnswer: function () {
                         var i;
                         for (i = 0; i < $scope.choices.length; i += 1) {
-                            if ($scope.choices[i].gameId === $scope.winningGame.game_id) {
+                            if ($scope.choices[i].gameId === winningId) {
                                 $scope.classOverlay[i] = 'overlay-correct';
                             }
                         }
@@ -83,9 +94,10 @@ define(['app', 'services/quizServices'], function (app) {
                             choicesEnabled = false;
                             quizHelper.stopCountdown();
 
-                            if (gameId === $scope.winningGame.game_id) {
+                            if (gameId === winningId) {
                                 $scope.classOverlay[id] = 'overlay-correct';
-                                $scope.score += GameConstants.BASE_SCORE + Math.ceil($scope.counter * GameConstants.TIME_BONUS / 10);
+                                $scope.score += GameConstants.BASE_SCORE +
+                                    Math.ceil($scope.counter * GameConstants.TIME_BONUS / 10);
                             } else {
                                 $scope.classOverlay[id] = 'overlay-wrong';
                                 quizHelper.displayCorrectAnswer();
@@ -99,12 +111,11 @@ define(['app', 'services/quizServices'], function (app) {
             $scope.gamesPerRound = GameConstants.GAMES_PER_ROUND;
             $scope.maxCounter = GameConstants.COUNTDOWN * 10;
             $scope.score = 0;
-            
+
             quizHelper.getGames();
 
             $scope.selectGame = function (id, gameId) {
                 quizHelper.handleClickOnChoice(id, gameId);
             };
-
         }]);
 });

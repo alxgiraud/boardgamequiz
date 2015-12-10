@@ -18,15 +18,39 @@
     height: 15px;
 }
 
-.large-row {
+
+/* Clues table */
+
+.table-clues tr {
     height: 80px;
+    font-size: 15px;
 }
+
+.table-clues th {
+    width: 20%
+}
+
+.table-clues td {
+    width: 30%
+}
+
+
+/* */
 
 
 /* Choice Cards */
 
 .card-choice {
     cursor: pointer;
+}
+
+.card-choice button {
+    white-space: normal;
+}
+
+.card-choice-disabled button {
+    cursor: default;
+    white-space: normal;
 }
 
 .well-thumbnail {

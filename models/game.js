@@ -39,7 +39,7 @@ gameSchema.statics.getThreeRandomGames = function (callback) {
         }
     ], function (err, results) {
         if (err) {
-            callback(err);
+            return callback(err);
         }
         var r = [],
             i,
