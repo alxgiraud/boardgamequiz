@@ -1,10 +1,14 @@
 <div class="container">
+  
     <div class="jumbotron">
+<!--
         <h1>Congratulations!</h1>
         <h3>Your score is:</h3>
         <h1><i class="fa fa-star fa-spin"></i> {{ score }} <i class="fa fa-star fa-spin"></i></h1>
-        <p><a ng-click="reset()" class="btn btn-primary btn-lg">Play again</a></p>
+-->
+        <p><a ng-click="playAgain()" class="btn btn-primary btn-lg">Play again</a></p>
     </div>
+
     <div ng-show="error != null" class="alert alert-danger" role="alert">{{ error }}</div>
     <div class="row">
         <div class="col-md-6">
@@ -20,30 +24,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Smith</td>
-                                <td class="text-right">2,235</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob Dylan</td>
-                                <td class="text-right">1,855</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>James Murky</td>
-                                <td class="text-right">1,821</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>R3xx@R</td>
-                                <td class="text-right">633</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>aaabbbccc</td>
-                                <td class="text-right">532</td>
+                            <tr ng-repeat="row in topLeaderboard">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ row.username }}</td>
+                                <td class="text-right">{{ row.score }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -54,14 +38,52 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4>Join the leaderboard</h4>
-                    <form name="scoreForm" ng-submit="submit()">
-                        <div class="form-group" ng-class="{ 'has-error' : (scoreForm.userName.$dirty && scoreForm.userName.$error.required)}">
-                            <input class="form-control" type="text" name="userName" ng-model="userName" placeholder="Enter your name..." ng-maxlength="10" maxlength="10" required>
+                    <form name="scoreForm" ng-submit="submitPerformance()">
+                        <div class="form-group" ng-class="{ 'has-error' : (scoreForm.username.$dirty && scoreForm.username.$error.required)}">
+                            <input class="form-control" 
+                                   type="text" 
+                                   name="username" 
+                                   ng-model="username" 
+                                   placeholder="Enter your name..." 
+                                   ng-maxlength="20" 
+                                   maxlength="20" 
+                                   ng-disabled="submitted" 
+                                   required>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save your score</button>
+                            <button type="submit" class="btn btn-primary btn-flat" ng-class="{ 'btn-success' : scoreSaved }" ng-disabled="submitted">
+                                <i class="fa fa-check" ng-show="scoreSaved"></i> {{ submitBtnLabel }}
+                            </button>
                         </div>
                     </form>
+
+                    <div ng-show="scoreSaved">
+                        <hr />
+                        <h5>Your rank</h5>
+                        <p>Top {{ topPercentage | number:2 }}% of players</p>
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th class="text-right">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in personalLeaderboard" ng-class="{ 'success' : row.topPercentage }">
+                                <td>{{ row.rank }}</td>
+                                <td>{{ row.username }}</td>
+                                <td class="text-right">{{ row.score }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-link">
+                                Show leaderboard
+                            </button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

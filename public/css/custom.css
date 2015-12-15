@@ -56,6 +56,7 @@
 .well-thumbnail {
     width: 250px;
     height: 200px;
+    background-color: #ffffff;
 }
 
 .overlay {
@@ -96,3 +97,18 @@
 
 
 /* */
+
+.btn-flat {
+    box-shadow: none;
+}
+
+.btn-flat:active {
+    box-shadow: none;
+}
+
+.btn-flat.disabled,
+.btn-flat[disabled],
+fieldset[disabled] .btn-flat {
+    cursor: default;
+    opacity: 1;
+}

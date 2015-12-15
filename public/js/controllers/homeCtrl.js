@@ -1,4 +1,4 @@
-/*global define, angular*/
+/*global define*/
 define(['app'], function (app) {
     'use strict';
     app.controller('HomeCtrl', ['$scope', '$location', function ($scope, $location) {
