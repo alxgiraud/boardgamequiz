@@ -5,13 +5,19 @@ require.config({
         'angular': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular',
         'angular-route': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route',
         'angularAMD': 'https://cdn.jsdelivr.net/angular.amd/0.2/angularAMD.min',
-        'roundProgress': '../lib/roundProgress'
-
+        'roundProgress': '../lib/roundProgress',
+        'ui-bootstrap': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap',
+        'ui-bootstrap-tpls': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls'
     },
     shim: {
+//        angular: {
+//            exports: "angular"
+//        },
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
-        'roundProgress': ['angular']
+        'roundProgress': ['angular'],
+        'ui-bootstrap': ['angular'],
+        'ui-bootstrap-tpls': ['angular']
     },
     deps: ['app']
 });

@@ -106,4 +106,25 @@ module.exports = function (app) {
             return res.json(leaderboard);
         });
     });
+    
+    app.get('/api/leaderboard/all', function (req, res) {
+        Models.leaderboardModel.find().sort({ score: -1 }).exec(function (err, records) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            var leaderboard = [],
+                i;
+            
+            for (i = 0; i < records.length; i += 1) {
+                leaderboard.push({
+                    rank: i + 1,
+                    username: records[i].username,
+                    score: records[i].score
+                });
+            }
+            
+            res.json(leaderboard);
+        });
+    });
 };

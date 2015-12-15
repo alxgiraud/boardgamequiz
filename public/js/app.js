@@ -1,8 +1,8 @@
 /*global define, angular*/
-define(['angularAMD', 'angular-route', 'roundProgress'], function (angularAMD) {
+define(['angularAMD', 'angular-route', 'roundProgress', 'ui-bootstrap', 'ui-bootstrap-tpls'], function (angularAMD) {
     'use strict';
 
-    var app = angular.module('guess-bg', ['ngRoute', 'angular-svg-round-progress']);
+    var app = angular.module('guess-bg', ['ngRoute', 'angular-svg-round-progress', 'ui.bootstrap', 'ui.bootstrap.tpls']);
 
     app.constant('GameConstants', {
         COUNTDOWN: 15,                  // time allowed to the player to chose a game in second
@@ -29,6 +29,11 @@ define(['angularAMD', 'angular-route', 'roundProgress'], function (angularAMD) {
                 templateUrl: '../views/end.html',
                 controller: 'EndCtrl',
                 controllerUrl: 'controllers/endCtrl'
+            }))
+            .when("/leaderboard", angularAMD.route({
+                templateUrl: '../views/leaderboard.html',
+                controller: 'LeaderboardCtrl',
+                controllerUrl: 'controllers/leaderboardCtrl'
             }))
             .otherwise({
                 redirectTo: '/'

@@ -1,7 +1,7 @@
 /*global define, angular*/
 define(['app', 'services/quizServices', 'services/apiServices'], function (app) {
     'use strict';
-    app.controller('EndCtrl', ['$scope', '$location', 'quizServices', 'apiServices', function ($scope, $location, quizServices, apiServices) {
+    app.controller('EndCtrl', ['$scope', 'quizServices', 'apiServices', function ($scope, quizServices, apiServices) {
 
         var endHelper = {
             init: function () {
@@ -16,7 +16,7 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
                     $scope.topLeaderboard = result;
 
                 }).error(function (error) {
-                    $scope.error = 'Oups! An error occurred while getting leaderboard.';
+                    $scope.error = 'Oups! An error occurred while getting the leaderboard.';
 
                 });
             },
@@ -74,10 +74,6 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
 
         $scope.submitPerformance = function () {
             endHelper.submitPerformance();
-        };
-
-        $scope.playAgain = function () {
-            $location.path('quiz');
         };
     }]);
 });

@@ -16,6 +16,9 @@ define(['app'], function (app) {
             },
             getPersonalLeaderboard: function (username, score) {
                 return $http.get(urlBase + '/leaderboard/personal?username=' + username + '&score=' + score);
+            },
+            getLeaderboard: function () {
+                return $http.get(urlBase + '/leaderboard/all');
             }
         };
 
