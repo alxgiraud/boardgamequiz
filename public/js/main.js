@@ -10,9 +10,6 @@ require.config({
         'ui-bootstrap-tpls': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls'
     },
     shim: {
-//        angular: {
-//            exports: "angular"
-//        },
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
         'roundProgress': ['angular'],

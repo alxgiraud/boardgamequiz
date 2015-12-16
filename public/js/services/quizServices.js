@@ -1,10 +1,11 @@
 /*global define*/
 define(['app', 'services/apiServices'], function (app) {
     'use strict';
-    app.factory('quizServices', ['$q', 'apiServices', function ($q, apiServices) {
+    app.factory('quizServices', ['$q', 'apiServices', 'GameConstants', function ($q, apiServices, GameConstants) {
 
         var privateVariables = {
                 score: 0,
+                combo: 0,
                 clueProperties: [
                     'year_published',
                     'min_players',
@@ -33,13 +34,13 @@ define(['app', 'services/apiServices'], function (app) {
 
                     return 'Name not found';
                 },
-                
+
                 // Return the name of a property between all the properties available for a clue 
                 getRandomProperty: function () {
                     var l = privateVariables.clueProperties.length;
                     return privateVariables.clueProperties[Math.floor(Math.random() * l)];
                 },
-                
+
                 // Check is the existing clues already have the property
                 hasClueProperty: function (clues, property) {
                     var i, l = clues.length;
@@ -51,11 +52,11 @@ define(['app', 'services/apiServices'], function (app) {
                     }
                     return false;
                 },
-                
+
                 // Return the label (i. e. friendly name) for a given property
                 getLabel: function (property) {
                     var label;
-                    
+
                     switch (property) {
                     case 'year_published':
                         label = 'Year Published';
@@ -90,11 +91,11 @@ define(['app', 'services/apiServices'], function (app) {
                     default:
                         label = 'Unknown Property';
                     }
-                    
+
                     return label;
                 },
-                
-                // Return the first three fields 'value' fro the given attributes array
+
+                // Return the first three fields 'value' for the given attributes array
                 getFirstThreeValues: function (attributes) {
                     var i,
                         l = (attributes.length > 3) ? 3 : attributes.length,
@@ -108,26 +109,26 @@ define(['app', 'services/apiServices'], function (app) {
 
                     return values;
                 },
-                
+
                 // Return value for the given property and manage special cases
                 getValue: function (game, property) {
                     var value;
 
                     if (property === 'playing_time') {
                         value = game[property] + ' minutes';
-                        
+
                     } else if (property === 'min_players' &&
                             game.hasOwnProperty('max_players') &&
-                            game.max_players > game.min_players) {
-                        
+                               game.max_players > game.min_players) {
+
                         value = game[property] + ' - ' + game.max_players;
-                        
+
                     } else if (property === 'min_age') {
                         value = game[property] + ' and up';
-                 
+
                     } else {
                         value = game[property];
-                        
+
                     }
 
                     return value;
@@ -166,14 +167,13 @@ define(['app', 'services/apiServices'], function (app) {
                     if (game.hasOwnProperty(property) &&
                             !privateMethods.hasClueProperty(clues, property) &&
                             (typeof game[property].length === 'undefined' ||
-                             game[property].length > 0)) {
+                            game[property].length > 0)) {
 
                         clues.push({
                             id_property: property,
                             label: privateMethods.getLabel(property),
                             values: (game[property] instanceof Array) ?
-                                    privateMethods.getFirstThreeValues(game[property]) :
-                                    [privateMethods.getValue(game, property)]
+                                    privateMethods.getFirstThreeValues(game[property]) : [privateMethods.getValue(game, property)]
                         });
                     }
                 }
@@ -181,13 +181,41 @@ define(['app', 'services/apiServices'], function (app) {
                 return clues;
 
             },
+            increaseScore: function (remainingTime) {
+                var comboBonus = 0;
+                
+                privateVariables.combo += 1;
+                privateVariables.score += GameConstants.BASE_SCORE +
+                    Math.ceil(remainingTime * GameConstants.TIME_BONUS);
+
+                if (privateVariables.combo >= GameConstants.COMBO_TRIGGER) {
+                    comboBonus = (privateVariables.combo > GameConstants.MAX_COMBO_BONUS) ?
+                                GameConstants.MAX_COMBO_BONUS : privateVariables.combo;
+                    
+                    privateVariables.score += Math.pow(comboBonus, 2) * 100;
+                }
+                                
+                return privateVariables.score;
+            },
+            resetCombo: function () {
+                privateVariables.combo = 0;
+                return privateVariables.combo;
+            },
+            getComboCounter: function () {
+                return privateVariables.combo;
+            },
+            resetScore: function () {
+                privateVariables.score = 0;
+                return privateVariables.score;
+            },
             saveScore: function (score) {
+                //NOTE: Why did I code a promise here?
                 var deferred = $q.defer();
                 deferred.resolve(this.score = score);
                 return deferred.promise;
             },
             getScore: function () {
-                return this.score;
+                return privateVariables.score;
             }
         };
 

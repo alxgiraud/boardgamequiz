@@ -112,3 +112,14 @@ fieldset[disabled] .btn-flat {
     cursor: default;
     opacity: 1;
 }
+
+.btn-link {
+    font-weight: bold;
+}
+
+
+/* leaderboard */
+
+.panel-leaderboard {
+    padding: 25px 50px;
+}

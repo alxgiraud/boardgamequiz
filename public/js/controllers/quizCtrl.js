@@ -3,10 +3,10 @@ define(['app', 'services/quizServices'], function (app) {
     'use strict';
     app.controller('QuizCtrl', ['$scope', '$interval', '$timeout', '$location', 'quizServices', 'GameConstants',
         function ($scope, $interval, $timeout, $location, quizServices, GameConstants) {
-            var choicesEnabled = false,
-                quizNumber = 0,
+            var winningId,
                 countdown,
-                winningId,
+                quizNumber = 0,
+                choicesEnabled = false,
                 quizHelper = {
                     // Get game data and init the question
                     getGames: function () {
@@ -14,21 +14,22 @@ define(['app', 'services/quizServices'], function (app) {
                             var games = result.data,
                                 winningGame = games[Math.floor(Math.random() * games.length)];
                             
+                            console.log(winningGame.names[0].value); //TODO: REMOVE IT !
+                            
                             if (winningGame.hasOwnProperty('game_id')) {
-                                
+
                                 winningId = winningGame.game_id;
                                 $scope.clues = quizServices.getRandomClues(winningGame);
-                                $scope.choices = quizServices.convertGamesToChoices(games);
-
+                                $scope.choices = quizServices.convertGamesToChoices(games);                            
                                 quizHelper.initUI();
-                                
+
                             } else {
                                 $scope.error = 'Oups! The games retrieved contain an error.';
-                                
+
                             }
                         }, function (error) {
                             $scope.error = 'Oups! An error occurred while retrieving the games.';
-                            
+
                         });
                     },
 
@@ -36,6 +37,7 @@ define(['app', 'services/quizServices'], function (app) {
                     initUI: function () {
                         quizNumber += 1;
                         $scope.quizNumber = quizNumber;
+                        $scope.comboCounter = quizServices.getComboCounter();
 
                         $scope.counter = GameConstants.COUNTDOWN * 10;
                         countdown = $interval(quizHelper.decreaseCountdown, 100);
@@ -49,6 +51,7 @@ define(['app', 'services/quizServices'], function (app) {
                         if ($scope.counter > 0) {
                             $scope.counter -= 1;
                         } else {
+                            quizServices.resetCombo();
                             quizHelper.stopCountdown();
                             quizHelper.displayCorrectAnswer();
                             quizHelper.loadNextTurn();
@@ -96,9 +99,10 @@ define(['app', 'services/quizServices'], function (app) {
 
                             if (gameId === winningId) {
                                 $scope.classOverlay[id] = 'overlay-correct';
-                                $scope.score += GameConstants.BASE_SCORE +
-                                    Math.ceil($scope.counter * GameConstants.TIME_BONUS / 10);
+                                $scope.score = quizServices.increaseScore($scope.counter);
+
                             } else {
+                                quizServices.resetCombo();
                                 $scope.classOverlay[id] = 'overlay-wrong';
                                 quizHelper.displayCorrectAnswer();
                             }
@@ -110,7 +114,8 @@ define(['app', 'services/quizServices'], function (app) {
 
             $scope.gamesPerRound = GameConstants.GAMES_PER_ROUND;
             $scope.maxCounter = GameConstants.COUNTDOWN * 10;
-            $scope.score = 0;
+            $scope.score = quizServices.resetScore();
+            $scope.comboCounter = quizServices.resetCombo();
 
             quizHelper.getGames();
 

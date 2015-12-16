@@ -6,7 +6,19 @@
         <div class="col-md-2">
             <div class="center-block counter-container">
                 <span class="counter-number">{{ counter / 10 | number : 0 }}</span>
-                <div round-progress max="maxCounter" current="counter" color="#2196f3" bgcolor="#dddddd" radius="50" stroke="10" semi="false" rounded="false" clockwise="true" responsive="true" duration="100" animation="linearEase">
+                <div round-progress
+                     max="maxCounter"
+                     current="counter"
+                     color="#2196f3"
+                     bgcolor="#dddddd"
+                     radius="50"
+                     stroke="10"
+                     semi="false"
+                     rounded="false"
+                     clockwise="true"
+                     responsive="true"
+                     duration="100"
+                     animation="linearEase">
                 </div>
             </div>
         </div>
@@ -16,11 +28,19 @@
                     <h2>Game n°{{ quizNumber }}</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    <h2><i class="fa fa-trophy"></i> {{ score }}</h2>
+                    <h2>
+                        <small ng-show="comboCounter > 1">Combo x{{ comboCounter }}</small>
+                        <i class="fa fa-trophy"></i> {{ score | number:0 }}
+                    </h2>
                 </div>
             </div>
             <div class="progress progress-striped">
-                <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="{{ quizNumber }}" aria-valuemin="0" aria-valuemax="{{ gamesPerRound }}" style="width: {{ (quizNumber - 1) * 100 / gamesPerRound }}%">
+                <div class="progress-bar progress-striped" 
+                     role="progressbar"
+                     aria-valuenow="{{ quizNumber }}"
+                     aria-valuemin="0"
+                     aria-valuemax="{{ gamesPerRound }}"
+                     style="width: {{ (quizNumber - 1) * 100 / gamesPerRound }}%">
                 </div>
             </div>
         </div>
