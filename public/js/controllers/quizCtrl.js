@@ -20,7 +20,7 @@ define(['app', 'services/quizServices'], function (app) {
 
                                 winningId = winningGame.game_id;
                                 $scope.clues = quizServices.getRandomClues(winningGame);
-                                $scope.choices = quizServices.convertGamesToChoices(games);                            
+                                $scope.choices = quizServices.convertGamesToChoices(games);
                                 quizHelper.initUI();
 
                             } else {
@@ -51,6 +51,7 @@ define(['app', 'services/quizServices'], function (app) {
                         if ($scope.counter > 0) {
                             $scope.counter -= 1;
                         } else {
+                            choicesEnabled = false;
                             quizServices.resetCombo();
                             quizHelper.stopCountdown();
                             quizHelper.displayCorrectAnswer();
@@ -74,7 +75,7 @@ define(['app', 'services/quizServices'], function (app) {
                             if (quizNumber < GameConstants.GAMES_PER_ROUND) {
                                 quizHelper.getGames();
                             } else {
-                                quizServices.saveScore($scope.score).then(function () {
+                                quizServices.saveFinalScore($scope.score).then(function () {
                                     $location.path('end');
                                 }, function () {
                                     $scope.error = 'Oups! An error occurred while saving the score.';

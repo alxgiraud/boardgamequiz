@@ -8,7 +8,7 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
                 $scope.submitted = false;
                 $scope.submitBtnLabel = 'Save your score';
 
-                $scope.score = quizServices.getScore();
+                $scope.score = quizServices.getFinalScore();
                 endHelper.getTopLeaderBoard();
             },
             getTopLeaderBoard: function () {
@@ -24,7 +24,7 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
                 if (typeof $scope.username !== 'undefined' && !$scope.submitted) {
                     $scope.submitted = true;
 
-                    var score = quizServices.getScore(),
+                    var score = quizServices.getFinalScore(),
                         username = $scope.username,
                         performance;
 

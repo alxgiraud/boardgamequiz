@@ -208,13 +208,13 @@ define(['app', 'services/apiServices'], function (app) {
                 privateVariables.score = 0;
                 return privateVariables.score;
             },
-            saveScore: function (score) {
+            saveFinalScore: function (score) {
                 //NOTE: Why did I code a promise here?
                 var deferred = $q.defer();
                 deferred.resolve(this.score = score);
                 return deferred.promise;
             },
-            getScore: function () {
+            getFinalScore: function () {
                 return privateVariables.score;
             }
         };
