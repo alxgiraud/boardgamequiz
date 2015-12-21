@@ -1,5 +1,19 @@
-<div class="container">
-        <div class="row">
+<script type="text/ng-template" id="resetModalContent.html">         
+    <div class="modal-header">
+        <h4 class="modal-title">Reset the game?</h4>
+    </div>
+    <div class="modal-body">
+        <p>You will lose your current score and restart the quiz.</p>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-link" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-link" type="button" ng-click="reset()">Reset</button>
+    </div>
+</script>
+
+<div class="container">    
+    <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-pills pull-right">
                 <li><a href="#/home">Home</a></li>
@@ -7,9 +21,6 @@
                 <li><a href="#/about">About</a></li>
             </ul>
         </div>
-    </div>
-    <div class="page-header">
-        <h1>Lorem Ipsum</h1>
     </div>
     <div class="row">
         <div class="col-md-2">
@@ -34,7 +45,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Game n°{{ quizNumber }}</h2>
+                    <h2>Game n°{{ quizNumber }} <a href="" ng-click="open()"><small><i class="fa fa-undo"></i></small></a></h2>
                 </div>
                 <div class="col-md-6 text-right">
                     <h2>

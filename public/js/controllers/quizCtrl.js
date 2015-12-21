@@ -1,8 +1,8 @@
 /*global define, angular*/
 define(['app', 'services/quizServices'], function (app) {
     'use strict';
-    app.controller('QuizCtrl', ['$scope', '$interval', '$timeout', '$location', 'quizServices', 'GameConstants',
-        function ($scope, $interval, $timeout, $location, quizServices, GameConstants) {
+    app.controller('QuizCtrl', ['$scope', '$interval', '$timeout', '$location', '$route', 'quizServices', 'GameConstants', '$uibModal',
+        function ($scope, $interval, $timeout, $location, $route, quizServices, GameConstants, $uibModal) {
             var winningId,
                 countdown,
                 quizNumber = 0,
@@ -13,9 +13,9 @@ define(['app', 'services/quizServices'], function (app) {
                         quizServices.getGames().then(function (result) {
                             var games = result.data,
                                 winningGame = games[Math.floor(Math.random() * games.length)];
-                            
+
                             console.log(winningGame.names[0].value); //TODO: REMOVE IT !
-                            
+
                             if (winningGame.hasOwnProperty('game_id')) {
 
                                 winningId = winningGame.game_id;
@@ -123,5 +123,34 @@ define(['app', 'services/quizServices'], function (app) {
             $scope.selectGame = function (id, gameId) {
                 quizHelper.handleClickOnChoice(id, gameId);
             };
+
+            $scope.open = function (size) {
+
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'resetModalContent.html',
+                    controller: 'ModalInstanceCtrl',
+                    size: size,
+                    resolve: {
+                        items: function () {
+                            return $scope.items;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    $route.reload();
+                });
+            };
+
         }]);
+    app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+        $scope.reset = function () {
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
+    });
 });

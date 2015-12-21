@@ -12,7 +12,9 @@
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body panel-leaderboard">
-                    <div class="page-header"><h1>Leaderboard</h1></div>
+                    <div class="page-header">
+                        <h1>Leaderboard</h1>
+                    </div>
                     <div ng-show="error != null" class="alert alert-danger" role="alert">{{ error }}</div>
                     <form>
                         <div class="form-group">
@@ -38,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="row in leaderboard.slice(((currentPage - 1) * itemsPerPage), ((currentPage) * itemsPerPage))">
+                            <tr ng-repeat="row in leaderboard.slice(((currentPage - 1) * itemsPerPage), ((currentPage) * itemsPerPage))" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
                                 <td>{{ row.rank }}</td>
                                 <td>{{ row.username }}</td>
                                 <td class="text-right">{{ row.score | number:0 }}</td>

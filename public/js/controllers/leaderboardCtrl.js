@@ -6,7 +6,6 @@ define(['app', 'services/apiServices'], function (app) {
         var leaderboard = [];
         $scope.loading = true;
 
-
         apiServices.getLeaderboard().success(function (result) {
             leaderboard = result;
             $scope.loading = false;

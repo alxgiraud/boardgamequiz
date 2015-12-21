@@ -1,51 +1,91 @@
-/* Home page */
+/* Home Page */
 
 @font-face {
-    font-family: mainTitleFont;
-    src: url('../fonts/Questrian.otf');
+    font-family: funnyFont;
+    src: url(../fonts/Questrian.otf) format('opentype'), url(../fonts/Questrian.ttf) format('opentype');
 }
 
-
-.background-image {
-    background-image: url('https://i.imgur.com/5ruk1lx.jpg');
+.cover-container {
+    background: url(../img/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-position: center center;
-    /*
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
-*/
+    height: 100vh;
+    text-align: center;
 }
 
 .layer {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(230, 230, 230, 0.6);
+    height: 100vh;
+}
+
+.nav-home {
+    padding-right: 15px;
+}
+
+.home-link,
+.home-link:hover,
+.home-link:active,
+.home-link:focus {
+    color: #666666;
+    font-weight: bold;
+}
+
+.funny-font {
+    font-family: funnyFont, "Arial Black", Gadget, Sans-serif;
+    text-transform: uppercase;
 }
 
 .main-title-container {
-    font-family: mainTitleFont;
-    line-height: 0.8;
-    padding-top: 15%;
-    padding-bottom: 25%;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
 }
 
 .top-main-title {
-    font-size: 65px;
+    line-height: 0.8;
+    font-size: 60px;
 }
 
 .bottom-main-title {
-    font-size: 195px;
+    line-height: 0.8;
+    font-size: 190px;
 }
 
-@media(max-width:450px) {
-    .bottom-main-title {
-        font-size: 130px;
-    }
+.container-btn-play {
+    margin-top: 20px;
 }
 
-/* */
+.btn-big {
+    padding: 15px 30px;
+    font-size: 17px;
+    line-height: 1.3333333;
+    border-radius: 3px;
+}
+
+.home-content {
+    text-align: center;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.home-header {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.icon-features {
+    width: 120px;
+    height: 120px;
+}
+
+.footer {
+    padding-bottom: 20px;
+    padding-right: 15px;
+}
 
 
 /* Quiz */

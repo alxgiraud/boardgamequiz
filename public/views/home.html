@@ -1,47 +1,74 @@
-<div class="background-image">
+<div class="cover-container">
     <div class="layer">
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="nav nav-pills pull-right">
-                    <li><a href="#/quiz">Play</a></li>
-                    <li><a href="#/leaderboard">Leaderboard</a></li>
-                    <li><a href="#/about">About</a></li>
-                </ul>
-            </div>
-        </div>
+        <ul class="nav nav-pills nav-home pull-right">
+            <li><a class="home-link" href="#/quiz">Play</a></li>
+            <li><a class="home-link" href="#/leaderboard">Leaderboard</a></li>
+            <li><a class="home-link" href="#/about">About</a></li>
+        </ul>
+
         <div class="text-center main-title-container">
-            <div class="top-main-title">Board Game</div>
-            <div class="bottom-main-title">Quiz</div>
-            <div>
-                <a href="#/quiz" class="btn btn-primary btn-lg">Play</a>
+            <div class="top-main-title funny-font">Board Game</div>
+            <div class="bottom-main-title funny-font">Quiz</div>
+            <div class="container-btn-play">
+                <a href="#/quiz" class="btn btn-primary btn-big">Play</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="container">
-    <div class="page-header">
-        <h1>Lorem Ispum Dolor</h1>
+<div class="home-content jumbotron">
+    <div class="home-header">
+        <h1 class="funny-font">How it works?</h1>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <h3>Lore Ispum</h3>
+        <div class="col-md-4 text-center">
+            <div class="icon-features center-block">
+                <img src="../img/game.svg" alt="game-icon" />
+            </div>
+            <h3 class="text-center">Guess the game</h3>
             <p>
-                Pri accusamus voluptatibus cu. Quo habeo rebum ex, mei melius eripuit appetere in. Mea ne integre appareat. Erant dolor accommodare te eam.
+                Use the clues to choose the correct board game between the three proposals.
             </p>
         </div>
-        <div class="col-md-4">
-            <h3>Lore Ispum</h3>
+        <div class="col-md-4 text-center">
+            <div class="icon-features icon-score center-block">
+                <img src="../img/medal.svg" alt="score-icon" />
+            </div>
+            <h3 class="text-center">Score points</h3>
             <p>
-                Pri accusamus voluptatibus cu. Quo habeo rebum ex, mei melius eripuit appetere in. Mea ne integre appareat. Erant dolor accommodare te eam.
+                Answer as fast as possible and make combo to score the maximum of points.
             </p>
         </div>
-        <div class="col-md-4">
-            <h3>Lore Ispum</h3>
+
+        <div class="col-md-4 text-center">
+            <div class="icon-features icon-podium center-block">
+                <img src="../img/podium.svg" alt="podium-icon" />
+            </div>
+            <h3 class="text-center">Enter the legend</h3>
             <p>
-                Pri accusamus voluptatibus cu. Quo habeo rebum ex, mei melius eripuit appetere in. Mea ne integre appareat. Erant dolor accommodare te eam.
+                Add your score to the <a href='#/leaderboard'>leaderboard</a> and compare your performance with other players.
             </p>
         </div>
     </div>
 </div>
+<div class="home-content jumbotron">
+    <div class="home-header">
+        <h1 class="funny-font">So what are you waiting for?</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6 text-center">
+            <p>
+                It's your turn now! Show to the rest of the world how smart you are.
+                <br/> Click the Play button below and test your board gaming knowledge.
+            </p>
+            <div class="container-btn-play">
+                <a href="#/quiz" class="btn btn-primary btn-big">Play new game</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p class="text-right text-muted">Made with love by <a href="">Alexandre Giraud</a>.</p>
+</footer>
