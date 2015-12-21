@@ -1,8 +1,8 @@
 /*global define, angular*/
-define(['angularAMD', 'angular-route', 'angular-animate', 'roundProgress', 'ui-bootstrap', 'ui-bootstrap-tpls'], function (angularAMD) {
+define(['angularAMD', 'angular-route', 'angular-animate', 'roundProgress', 'smoothScroll', 'ui-bootstrap', 'ui-bootstrap-tpls'], function (angularAMD) {
     'use strict';
 
-    var app = angular.module('guess-bg', ['ngRoute', 'ngAnimate', 'angular-svg-round-progress', 'ui.bootstrap', 'ui.bootstrap.tpls']);
+    var app = angular.module('guess-bg', ['ngRoute', 'ngAnimate', 'angular-svg-round-progress', 'smoothScroll', 'ui.bootstrap', 'ui.bootstrap.tpls']);
     
     app.constant('GameConstants', {
         COUNTDOWN: 15,                  // time allowed to the player to chose a game in second

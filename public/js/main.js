@@ -7,6 +7,7 @@ require.config({
         'angular-animate': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate',
         'angularAMD': 'https://cdn.jsdelivr.net/angular.amd/0.2/angularAMD.min',
         'roundProgress': '../lib/roundProgress',
+        'smoothScroll': '../lib/angular-smooth-scroll',
         'ui-bootstrap': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap',
         'ui-bootstrap-tpls': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls'
     },
@@ -15,6 +16,7 @@ require.config({
         'angular-route': ['angular'],
         'angular-animate': ['angular'],
         'roundProgress': ['angular'],
+        'smoothScroll': ['angular'],
         'ui-bootstrap': ['angular'],
         'ui-bootstrap-tpls': ['angular']
     },

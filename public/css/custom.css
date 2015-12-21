@@ -54,6 +54,12 @@
     font-size: 190px;
 }
 
+@media only screen and (max-width: 480px) {
+    .bottom-main-title {
+        font-size: 95px;
+    }
+}
+
 .container-btn-play {
     margin-top: 20px;
 }
@@ -77,12 +83,26 @@
     margin-bottom: 40px;
 }
 
+.arrow-down {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .icon-features {
     width: 120px;
     height: 120px;
 }
 
-.footer {
+@media only screen and (min-width: 768px) {
+    .container-btn-play-big {
+        line-height: 181px;
+        background: url(../img/arrows-bg.png) no-repeat bottom center;
+    }
+}
+
+footer {
     padding-bottom: 20px;
     padding-right: 15px;
 }
@@ -217,6 +237,6 @@ fieldset[disabled] .btn-flat {
 }
 
 .no-animate {
-   -webkit-transition: none !important;
-   transition: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
 }
