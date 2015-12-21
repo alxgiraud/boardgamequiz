@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: funnyFont;
-    src: url(../fonts/Questrian.otf) format('opentype'), url(../fonts/Questrian.ttf) format('opentype');
+    src: url(../fonts/Questrian.otf) format('opentype');
 }
 
 .cover-container {
@@ -16,7 +16,7 @@
 }
 
 .layer {
-    background-color: rgba(230, 230, 230, 0.6);
+    background-color: rgba(215, 215, 215, 0.6);
     height: 100vh;
 }
 
@@ -214,4 +214,9 @@ fieldset[disabled] .btn-flat {
 
 .panel-leaderboard {
     padding: 25px 50px;
+}
+
+.no-animate {
+   -webkit-transition: none !important;
+   transition: none !important;
 }

@@ -40,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="row in leaderboard.slice(((currentPage - 1) * itemsPerPage), ((currentPage) * itemsPerPage))" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+                            <tr ng-repeat="row in leaderboard.slice(((currentPage - 1) * itemsPerPage), ((currentPage) * itemsPerPage))" class="no-animate">
                                 <td>{{ row.rank }}</td>
                                 <td>{{ row.username }}</td>
                                 <td class="text-right">{{ row.score | number:0 }}</td>
