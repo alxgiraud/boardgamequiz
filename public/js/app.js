@@ -18,9 +18,7 @@ define(['angularAMD', 'angular-route', 'angular-animate', 'roundProgress', 'smoo
     app.config(function ($routeProvider) {
         $routeProvider
             .when("/", angularAMD.route({
-                templateUrl: '../views/home.html',
-                controller: 'HomeCtrl',
-                controllerUrl: 'controllers/homeCtrl'
+                templateUrl: '../views/home.html'
             }))
             .when("/quiz", angularAMD.route({
                 templateUrl: '../views/quiz.html',
