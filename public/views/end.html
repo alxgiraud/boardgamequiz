@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="row in topLeaderboard">
+                            <tr ng-repeat="row in topLeaderboard" class="no-animate">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ row.username }}</td>
                                 <td class="text-right">{{ row.score | number:0 }}</td>
