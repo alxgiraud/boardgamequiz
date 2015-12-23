@@ -14,8 +14,6 @@ define(['app', 'services/quizServices'], function (app) {
                             var games = result.data,
                                 winningGame = games[Math.floor(Math.random() * games.length)];
 
-                            console.log(winningGame.names[0].value); //TODO: REMOVE IT !
-
                             if (winningGame.hasOwnProperty('game_id')) {
 
                                 winningId = winningGame.game_id;

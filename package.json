@@ -1,27 +1,33 @@
 {
-  "name": "bg-stats",
-  "version": "0.0.2",
-  "description": "Some statistics from BGG API",
-  "main": "index.js",
+  "name": "boardgamequiz",
+  "version": "1.0.0",
+  "description": "Quiz web app about board games.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alxgiraud/bg-stats.git"
+    "url": "https://github.com/alxgiraud/boardgamequiz.git"
   },
+  "keywords": [
+    "boardgame",
+    "quiz",
+    "game"
+  ],
   "author": "Alexandre Giraud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alxgiraud/bg-stats/issues"
+    "url": "https://github.com/alxgiraud/boardgamequiz/issues"
   },
-  "homepage": "https://github.com/alxgiraud/bg-stats",
+  "homepage": "https://github.com/alxgiraud/boardgamequiz",
   "dependencies": {
-    "async": "*",
+    "async": "^1.5.0",
     "body-parser": "^1.14.2",
-    "express": "^4.13.3",
+    "express": "^5.0.0-alpha.2",
     "method-override": "^2.3.5",
-    "mongodb": "^2.1.1",
+    "mongodb": "^2.1.2",
     "mongoose": "^4.3.3",
     "morgan": "^1.6.1"
   }
