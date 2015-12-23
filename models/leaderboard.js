@@ -8,7 +8,7 @@ var leaderboardSchema = new Schema({
     score: Number,
     ip: String
 }, {
-    collection: 'tracking_debug'
+    collection: 'leaderboard'
 });
 
 leaderboardSchema.statics.getTopleaderboard = function (callback) {

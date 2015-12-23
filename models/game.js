@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var async = require('async');
 
-var gameSchema = new Schema({ game_id: Number }, { collection: 'boardgames_debug' });
+var gameSchema = new Schema({ game_id: Number }, { collection: 'boardgames' });
 
-gameSchema.statics.getThreeRandomGames = function (callback) {
+gameSchema.statics.getThreeRandomGames = function (callback) { //NOTE: Should be improved!
     'use strict';
 
     var queryRandOne = this.find({ rand: { $gt: Math.random() }, 'statistics.owned': { $gt: 2000 }}).sort({ rand: 1 }).limit(1),
