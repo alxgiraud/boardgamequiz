@@ -236,6 +236,12 @@ fieldset[disabled] .btn-flat {
     padding: 25px 50px;
 }
 
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 34px;
+    }
+}
+
 .no-animate {
     -webkit-transition: none !important;
     transition: none !important;
