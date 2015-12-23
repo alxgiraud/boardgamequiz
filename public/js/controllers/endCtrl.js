@@ -35,6 +35,7 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
                         });
 
                         apiServices.addToLeaderboard(performance).success(function (result) {
+                            quizServices.resetScore();
                             endHelper.getTopLeaderBoard(); //Refresh the leaderboard
                             endHelper.getPersonalLeaderboard(username, score);
                             $scope.submitBtnLabel = 'Score saved!';
@@ -60,9 +61,9 @@ define(['app', 'services/quizServices', 'services/apiServices'], function (app) 
                             break;
                         }
                     }
-                    
+
                     $scope.personalLeaderboard = result;
-                    
+
 
                 }).error(function (error) {
                     $scope.error = 'Oups! An error occurred while getting your leaderboard.';

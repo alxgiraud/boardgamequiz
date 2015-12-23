@@ -8,13 +8,18 @@
         </ul>
     </div>
     
-    <div class="jumbotron">
+    <div class="jumbotron" ng-if="score > 0">
         <h1>Congratulations!</h1>
         <h3>Your score is:</h3>
         <h1><i class="fa fa-star fa-spin"></i> {{ score | number:0 }} <i class="fa fa-star fa-spin"></i></h1>
         <p><a href="#/quiz" class="btn btn-primary btn-lg">Play again</a></p>
     </div>
-
+    <div class="jumbotron" ng-if="score === 0">
+        <h1>Oups...</h1>
+        <h3>You didn't score any points.</h3>
+        <p><a href="#/quiz" class="btn btn-primary btn-lg">Play again</a></p>
+    </div>
+  
     <div ng-show="error != null" class="alert alert-danger" role="alert">{{ error }}</div>
     <div class="row">
         <div class="col-md-6">
@@ -37,10 +42,13 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="form-group">
+                        <a href="#/leaderboard" class="btn btn-link">Show leaderboard</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ng-if="score > 0">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4>Join the leaderboard</h4>
@@ -49,7 +57,7 @@
                             <input class="form-control" 
                                    type="text" 
                                    name="username" 
-                                   ng-model="username" 
+                                   ng-model="$parent.username" 
                                    placeholder="Enter your name..." 
                                    ng-maxlength="20" 
                                    maxlength="20" 
