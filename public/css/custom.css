@@ -229,12 +229,13 @@ fieldset[disabled] .btn-flat {
     font-weight: bold;
 }
 
+.btn-reset:focus,
+.btn-reset:active {
+    outline: none !important;
+}
+
 
 /* leaderboard */
-
-.panel-leaderboard {
-    padding: 25px 50px;
-}
 
 @media screen and (max-width: 480px) {
     h1 {
