@@ -24,7 +24,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div ng-show="!gameReady" class="loader">
+        <h1 class="text-center"><i class="fa fa-spinner fa-pulse"></i></h1>
+    </div>
+    
+    <div class="row" ng-show="gameReady">
         <div class="col-md-2">
             <div class="center-block counter-container">
                 <span class="counter-number">{{ counter / 10 | number : 0 }}</span>
@@ -70,7 +74,7 @@
 
     <div ng-show="error != null" class="alert alert-danger" role="alert">{{ error }}</div>
 
-    <table class="table table-striped table-condensed table-clues">
+    <table ng-show="gameReady" class="table table-striped table-condensed table-clues">
         <tbody>
             <tr>
                 <th>{{ clues[0].label }}</th>
@@ -94,7 +98,8 @@
             </tr>
         </tbody>
     </table>
-    <div class="row">
+    
+    <div class="row" ng-show="gameReady">
         <div class="col-md-4" ng-class="(classOverlay[choice.id] !== null) ? 'card-choice-disabled' : 'card-choice'" ng-repeat="choice in choices">
             <div class="panel panel-default">
                 <div class="panel-body" ng-class="(classOverlay[choice.id] !== null) ? 'hover' : ''" ng-click="selectGame(choice.id, choice.gameId)">

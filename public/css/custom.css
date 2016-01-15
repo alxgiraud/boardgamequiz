@@ -110,6 +110,10 @@ footer {
 
 /* Quiz */
 
+.loader {
+    margin-top: 20%;
+}
+
 .counter-container {
     max-width: 250px;
 }

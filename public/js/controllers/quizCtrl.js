@@ -15,7 +15,7 @@ define(['app', 'services/quizServices'], function (app) {
                                 winningGame = games[Math.floor(Math.random() * games.length)];
 
                             if (winningGame.hasOwnProperty('game_id')) {
-
+                                $scope.gameReady = true;
                                 winningId = winningGame.game_id;
                                 $scope.clues = quizServices.getRandomClues(winningGame);
                                 $scope.choices = quizServices.convertGamesToChoices(games);
